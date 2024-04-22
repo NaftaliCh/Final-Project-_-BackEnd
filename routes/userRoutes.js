@@ -11,3 +11,4 @@ router.put('/profile', authenticateToken, updateProfile);
 router.post('/change-password', authenticateToken, changePassword);
 
 export default router;
+
