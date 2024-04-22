@@ -12,3 +12,5 @@ export class UserRepository {
     return await prisma.user.update({ where: { id }, data });
   }
 }
+
+// layer repository
