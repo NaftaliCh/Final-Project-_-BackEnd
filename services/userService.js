@@ -36,6 +36,10 @@ export class UserService {
     const hashedNewPassword = await bcrypt.hash(newPassword, 8);
     return await userRepository.updateUser(userId, { password: hashedNewPassword });
   }
+  async listAllUsers() {
+    return await userRepo.getAllUsers();
+  }
+
 }
 
 //

@@ -22,3 +22,43 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Field {
+  id        Int       @id @default(autoincrement())
+  name      String
+  location  String
+  schedules Schedule[]
+}
+
+model Schedule {
+  id        Int       @id @default(autoincrement())
+  fieldId   Int
+  startTime DateTime
+  endTime   DateTime
+  available Boolean   @default(true)
+  bookings  Booking[] @relation("scheduleToBooking")
+
+  Field     Field     @relation(fields: [fieldId], references: [id])
+}
+
+model Booking {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  scheduleId Int
+  status     String   @default("booked") // Values can be "booked", "cancelled"
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  User       User     @relation(fields: [userId], references: [id])
+  Schedule   Schedule @relation(name: "scheduleToBooking", fields: [scheduleId], references: [id])
+}
+
+model Notification {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  message    String
+  isRead     Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  user       User     @relation(fields: [userId], references: [id])
+}

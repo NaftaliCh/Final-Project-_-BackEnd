@@ -16,3 +16,11 @@ export function authenticateToken(req, res, next) {
         next(); // Lanjutkan ke middleware/route berikutnya
     });
 }
+export const checkAdmin = (req, res, next) => {
+    // Contoh: Periksa apakah user memiliki role 'admin'
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({ message: 'Access denied' });
+    }
+    next();
+  };
+  
