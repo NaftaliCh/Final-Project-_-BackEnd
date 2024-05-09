@@ -7,3 +7,5 @@ router.get('/', getAvailableSchedules);
 router.get('/:scheduleId', getScheduleDetails);
 
 export default router;
+
+//

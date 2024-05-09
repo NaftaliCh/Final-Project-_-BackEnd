@@ -8,3 +8,5 @@ router.get('/bookings', authenticateToken, checkAdmin, getAllBookings);
 router.get('/users', authenticateToken, checkAdmin, getAllUsers);
 
 export default router;
+
+//

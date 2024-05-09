@@ -8,3 +8,5 @@ router.get('/', authenticateToken, getNotifications);
 router.post('/:notificationId/mark-as-read', authenticateToken, markNotificationAsRead);
 
 export default router;
+
+//
