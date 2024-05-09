@@ -38,6 +38,11 @@ function Dashboard() {
       )}
     </div>
   );
-}
+} export default Dashboard;
 
-export default Dashboard;
+<div className="container dashboard">
+  <h1>Dashboard</h1>
+  <div>Welcome, {user.name}</div>
+  <div>Email: {user.email}</div>
+  {/* Tambahkan lebih banyak informasi pengguna atau konten relevan lainnya di sini */}
+</div>

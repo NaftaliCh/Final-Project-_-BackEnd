@@ -69,3 +69,20 @@ function FieldForm({ field }) {
 }
 
 export default FieldForm;
+
+<div className="container form">
+  <h1>{field ? 'Update Field' : 'Add Field'}</h1>
+  <form onSubmit={handleSubmit}>
+    <label>
+      Name:
+      <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+    </label>
+    <label>
+      Location:
+      <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} required />
+    </label>
+    <button type="submit">{field ? 'Update' : 'Add'}</button>
+  </form>
+</div>
+
+

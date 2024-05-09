@@ -7,6 +7,7 @@ import BookingForm from './components/bookings/BookingForm';
 import BookingList from './components/bookings/BookingList';
 import FieldList from './components/fields/FieldList';
 import FieldForm from './components/fields/FieldForm';
+import './css/styles.css';
 
 function App() {
   return (

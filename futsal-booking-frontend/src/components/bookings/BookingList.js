@@ -38,3 +38,13 @@ function BookingList() {
 }
 
 export default BookingList;
+
+<div className="container list">
+  <h1>Your Bookings</h1>
+  <ul>
+    {bookings.map(booking => (
+      <li key={booking.id}>{`Booking on ${booking.date} for Field ${booking.fieldId} - Status: ${booking.status}`}</li>
+    ))}
+  </ul>
+</div>
+

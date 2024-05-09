@@ -49,6 +49,14 @@ function Register() {
       </form>
     </div>
   );
-}
+} export default Register;
 
-export default Register;
+<div className="container auth-form">
+  <h1>Register</h1>
+  <form onSubmit={handleSubmit}>
+    <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Full Name" />
+    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email Address" />
+    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+    <button type="submit">Register</button>
+  </form>
+</div>

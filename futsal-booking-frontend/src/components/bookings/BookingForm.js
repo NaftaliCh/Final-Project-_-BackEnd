@@ -45,3 +45,19 @@ function BookingForm({ booking }) {
 }
 
 export default BookingForm;
+
+<div className="container form">
+  <h1>{booking ? 'Edit Booking' : 'Create Booking'}</h1>
+  <form onSubmit={handleSubmit}>
+    <label>
+      Date:
+      <input type="date" value={date} onChange={e => setDate(e.target.value)} required />
+    </label>
+    <label>
+      Field ID:
+      <input type="text" value={fieldId} onChange={e => setFieldId(e.target.value)} required />
+    </label>
+    <button type="submit">{booking ? 'Update' : 'Create'}</button>
+  </form>
+</div>
+

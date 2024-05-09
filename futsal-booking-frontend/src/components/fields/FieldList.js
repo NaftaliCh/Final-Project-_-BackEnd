@@ -40,3 +40,15 @@ function FieldList() {
 }
 
 export default FieldList;
+
+<div className="container list">
+  <h1>Available Fields</h1>
+  <ul>
+    {fields.map(field => (
+      <li key={field.id}>
+        {field.name} - Location: {field.location}
+      </li>
+    ))}
+  </ul>
+</div>
+
