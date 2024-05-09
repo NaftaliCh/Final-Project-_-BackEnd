@@ -20,3 +20,5 @@ export const markNotificationAsRead = async (req, res) => {
     res.status(500).json({ message: 'Failed to mark notification as read', error });
   }
 };
+
+//
