@@ -1,25 +1,29 @@
 import { BookingRepository } from '../repositories/bookingRepository.js';
-const bookingRepo = new BookingRepository();
+
+const bookingRepository = new BookingRepository();
 
 export class BookingService {
-  async listAllBookings() {
-    return await bookingRepo.getAllBookings();
-  }
-  async bookSchedule(userId, scheduleId) {
-    return await bookingRepo.createBooking({ userId, scheduleId });
+  async createBooking(data) {
+    return await bookingRepository.createBooking(data);
   }
 
-  async getUserBookings(userId) {
-    return await bookingRepo.findBookingsByUserId(userId);
+  async getBookingsByUser(userId) {
+    return await bookingRepository.findBookingsByUserId(userId);
   }
 
-  async updateBooking(bookingId, status) {
-    return await bookingRepo.updateBookingStatus(bookingId, status);
+  async getBookingById(bookingId) {
+    return await bookingRepository.findBookingById(bookingId);
   }
 
-  async cancelBooking(bookingId) {
-    return await bookingRepo.deleteBooking(bookingId);
+  async updateBookingStatus(bookingId, status) {
+    return await bookingRepository.updateBookingStatus(bookingId, status);
+  }
+
+  async deleteBooking(bookingId) {
+    return await bookingRepository.deleteBooking(bookingId);
+  }
+
+  async getAllBookings() {
+    return await bookingRepository.findAllBookings();
   }
 }
-
-//

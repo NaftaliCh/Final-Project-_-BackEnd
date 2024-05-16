@@ -15,27 +15,14 @@ export class BookingRepository {
   async findBookingsByUserId(userId) {
     return await prisma.booking.findMany({
       where: { userId },
-      include: {
-        Schedule: {
-          include: {
-            Field: true // Assuming the Schedule model has a relation to a Field model
-          }
-        },
-        User: true // Include User data
-      }
+      include: { Schedule: true }
     });
   }
 
-  async getAllBookings() {
-    return await prisma.booking.findMany({
-      include: {
-        User: true, // Include User data for admin to view who made the booking
-        Schedule: {
-          include: {
-            Field: true // Include Field data to show where the booking is made
-          }
-        }
-      }
+  async findBookingById(bookingId) {
+    return await prisma.booking.findUnique({
+      where: { id: bookingId },
+      include: { Schedule: true, User: true }
     });
   }
 
@@ -51,6 +38,10 @@ export class BookingRepository {
       where: { id: bookingId }
     });
   }
-}
 
-//
+  async findAllBookings() {
+    return await prisma.booking.findMany({
+      include: { Schedule: true, User: true }
+    });
+  }
+}

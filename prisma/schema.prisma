@@ -1,10 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -15,12 +8,15 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  password  String
-  name      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            Int             @id @default(autoincrement())
+  email         String          @unique
+  password      String
+  name          String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  bookings      Booking[]
+  payments      Payment[]
+  notifications Notification[]
 }
 
 model Field {
@@ -36,29 +32,42 @@ model Schedule {
   startTime DateTime
   endTime   DateTime
   available Boolean   @default(true)
-  bookings  Booking[] @relation("scheduleToBooking")
+  bookings  Booking[] @relation("ScheduleBookings")
 
   Field     Field     @relation(fields: [fieldId], references: [id])
 }
 
 model Booking {
-  id         Int      @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   userId     Int
   scheduleId Int
-  status     String   @default("booked") // Values can be "booked", "cancelled"
+  status     String    @default("booked") // Values can be "booked", "cancelled"
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  User       User      @relation(fields: [userId], references: [id])
+  Schedule   Schedule  @relation(name: "ScheduleBookings", fields: [scheduleId], references: [id])
+  payments   Payment[]
+}
+
+model Payment {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  bookingId  Int
+  amount     Float
+  status     String   // Values can be "pending", "completed", "failed"
   createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
 
   User       User     @relation(fields: [userId], references: [id])
-  Schedule   Schedule @relation(name: "scheduleToBooking", fields: [scheduleId], references: [id])
+  Booking    Booking  @relation(fields: [bookingId], references: [id])
 }
 
 model Notification {
-  id         Int      @id @default(autoincrement())
-  userId     Int
-  message    String
-  isRead     Boolean  @default(false)
-  createdAt  DateTime @default(now())
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
 
-  user       User     @relation(fields: [userId], references: [id])
+  User      User     @relation(fields: [userId], references: [id])
 }
